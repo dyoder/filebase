@@ -1,0 +1,36 @@
+= Warning
+
+This code is alpha quality. Do not use in production.
+
+= Introduction
+
+Filebase is a very simple implementation for file-based databases. It comes with one built-in store that uses YAML, where each record is an individual file, but you can implement different storage classes if you like. It also provides a model class that allows you to treat your records (files) like classes, including a very basic associations implementation.
+
+= Example
+
+Assuming we have the file 'joe@acme.com.yml' in the 'db/person' directory and it looks like this:
+
+	--- 
+	name: Joe Smith
+	organization: acme.com
+	key: joe@acme.com
+
+Then the code for accessing this "database" looks like this:
+
+	class Person
+	  include Filebase::Model[ :db / :person ]
+	  has_one :organization
+	end
+	class Organization
+	  include Filebase::Model[ :verify / :db / :organization ]
+	  has_many :members, :class => Person
+	end
+
+	joe = Person.find( 'joe@acme.com' )
+	joe.name                                        # => 'Joe Smith'
+	joe.organization.name	                        # => 'Acme, Inc.'
+	
+You can create and delete records much like a normal database. You find an object using it's "key" which is actually the filename (typically with an extension like '.yml') and can be accessed using the "key" attribute. Note that changing an object's key will not remove the original value - you have to explicitly delete it. So, in effect, you can copy a value by changing the key and saving it.
+
+Also, a note on the associations - they are not automatically bi-directional. Putting a has_one in one place and a complementary has_many in another does not mean that if you change one, the other will change. This will be fixed in a later version, but for now, remember, these are files, and the data is synchronized between them in anyway.
+
