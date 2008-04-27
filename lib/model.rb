@@ -38,31 +38,32 @@ class Filebase
 		    def has_one( name, options = {} )
 		      module_eval do
 		        define_method name do
+  		        @has_one ||= {}
     		      options[:class] ||= Object.module_eval( name.to_s.camel_case )
-		          options[:class].find( get( name ) ) 
+		          @has_one[name] ||= options[:class].find( get( name ) ) 
 		        end
 		        define_method( name.to_s + '=' ) do | val |
+  		        @has_one ||= {}; @has_one[name] = nil
 		          set( name, String === val ? val : val.key )
 		        end
 		      end
 		    end
 		    def has_many( name, options = {} )
 		      module_eval do
-  	        old_assign = instance_method(:assign)
-		        define_method :assign do |assigns|
-		          old_assign.bind(self).call( assigns )
+		        define_method( name ) do
+		          @has_many ||= {}
     		      options[:class] ||= Object.module_eval( name.to_s.camel_case )
-		          set( name, ( get( name ) || [] ).uniq.map { |key| options[:class].find( key ) } )
-		          self
+		          @has_many[name] ||= ( get( name ) || [] ).uniq.map { |key| options[:class].find( key ) } 
 		        end
-		      end
-	        ( class << self ; self ; end ).module_eval do
-	          old_save = instance_method( :save )
-	          define_method( :save ) do | object |
-	            object.set( name, object.get( name ).map{ |x| x.key }.uniq )
-	            old_save.bind(self).call(object)
-	          end
-	        end
+            # when we save, make sure to pick up any changes to the array
+            (class<<self;self;end).module_eval do
+              old_save = instance_method(:save)
+              define_method :save do |object|
+  		          object.set( name, object.send( name ).map{ |x| x.key }.uniq )
+                old_save.bind(self).call(object)
+              end
+            end
+          end
 		    end
 		  end
 		  
@@ -71,6 +72,7 @@ class Filebase
         def assign( assigns ) ; assigns.each { |k,v| self.send( "#{k}=", v ) }; self ; end
         def save ; self.class.save( self ) ; self; end
         def delete ; self.class.delete( self ) ; self ; end
+        def ==(object) ; key == object.key ; end
       end
 
 		end

@@ -39,10 +39,8 @@ describe 'A filebase' do
   end
   
   it "should allow a 'has-many' association'" do
-    acme = Organization.find('acme.com')
-    acme.members << Person.find('joe@acme.com')
-    acme.save
-    acme.members.include?('joe@acme.com').should == true
+    acme = Organization.find('acme.com'); acme.members << Person.find('joe@acme.com'); acme.save
+    acme.members.include?( Person.find( 'joe@acme.com' )).should == true
   end
   
 end
