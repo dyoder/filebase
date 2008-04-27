@@ -34,3 +34,5 @@ You can create and delete records much like a normal database. You find an objec
 
 Also, a note on the associations - they are not automatically bi-directional. Putting a has_one in one place and a complementary has_many in another does not mean that if you change one, the other will change. This will be fixed in a later version, but for now, remember, these are files, and the data is synchronized between them in anyway.
 
+Another limitation is that there is no real query language. You can access all of the records for a given model using #all, and then filter them as you would any array. But obviously if you find yourself need complex queries spanning several different classes, you should probably use a relational database.
+

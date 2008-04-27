@@ -23,6 +23,12 @@ describe 'A filebase' do
     jane.name = 'Jane Doe' ; jane.save
     Person.find( 'jane@acme.com' ).name.should == 'Jane Doe'
   end
+
+  it "should allow you to create new attributes out of thin air" do
+    jane = Person.find( 'jane@acme.com' )
+    jane.gender = 'Female' ; jane.save
+    Person.find( 'jane@acme.com' ).gender.should == 'Female'
+  end
   
   it 'should allow you to delete a record' do
     Person.find('jane@acme.com').delete
@@ -41,6 +47,6 @@ describe 'A filebase' do
   it "should allow a 'has-many' association'" do
     acme = Organization.find('acme.com'); acme.members << Person.find('joe@acme.com'); acme.save
     acme.members.include?( Person.find( 'joe@acme.com' )).should == true
-  end
+  end    
   
 end
