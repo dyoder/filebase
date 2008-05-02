@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors = ["Dan Yoder"]
   s.date = %q{2008-04-30}
   s.email = %q{dan@zeraweb.com}
-  s.executables = ["waves", "waves-server", "waves-console"]
-  s.files = ["lib/*.rb"]
+  s.executables = []
+  s.files = Dir["lib/*.rb"]
   s.has_rdoc = true
   s.homepage = %q{http://dev.zeraweb.com/waves}
   s.require_paths = ["lib"]
