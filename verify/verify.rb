@@ -1,3 +1,8 @@
+require 'rubygems'
+require 'bacon'
+Bacon.extend Bacon::TestUnitOutput
+Bacon.summary_on_exit
+
 require 'lib/model.rb'
 
 class Person ; include Filebase::Model[ :verify / :db / :person ] ; has_one :organization ; end

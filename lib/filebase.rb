@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'lib/yaml'
 require 'lib/symbol'
 require 'lib/string'
