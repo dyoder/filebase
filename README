@@ -27,7 +27,7 @@ Then the code for accessing this "database" looks like this:
 	end
 
 	joe = Person.find( 'joe@acme.com' )
-	joe.name                                        # => 'Joe Smith'
+	joe.name                                      # => 'Joe Smith'
 	joe.organization.name	                        # => 'Acme, Inc.'
 	
 You can create and delete records much like a normal database. You find an object using it's "key" which is actually the filename (typically with an extension like '.yml') and can be accessed using the "key" attribute. Note that changing an object's key will not remove the original value - you have to explicitly delete it. So, in effect, you can copy a value by changing the key and saving it.
