@@ -1,7 +1,5 @@
 require 'rubygems'
-require 'lib/yaml'
-require 'lib/symbol'
-require 'lib/string'
+require 'drivers/yaml'
 class Filebase
   class << self ; attr_accessor :storage ; end
   self.storage = YAML

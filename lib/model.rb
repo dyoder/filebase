@@ -1,5 +1,4 @@
-require 'lib/filebase'
-require 'lib/attributes'
+require 'attributes'
 
 class Filebase
   
