@@ -10,14 +10,14 @@ Gem::manage_gems
 
 SPEC = Gem::Specification.new do |s|
   s.name = %q{filebase}
-  s.version = "0.2.0"
+  s.version = "0.2.1"
   s.specification_version = 2 if s.respond_to? :specification_version=
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Yoder"]
   s.date = %q{2008-04-30}
   s.email = %q{dan@zeraweb.com}
   s.executables = []
-  s.files = Dir["lib/*.rb"]
+  s.files = Dir["lib/**/*.rb"]
   s.has_rdoc = true
   s.homepage = %q{http://dev.zeraweb.com/waves}
   s.require_paths = ["lib"]
@@ -28,7 +28,7 @@ SPEC = Gem::Specification.new do |s|
 end
 
 task :package => :clean do 
-  Gem::Builder.new(spec).build
+  Gem::Builder.new(SPEC).build
 end
 
 task :clean do

@@ -3,10 +3,11 @@ require 'bacon'
 Bacon.extend Bacon::TestUnitOutput
 Bacon.summary_on_exit
 
-require 'lib/model.rb'
+require 'lib/filebase'
+require 'lib/filebase/model'
 
-class Person ; include Filebase::Model[ :test / :db / :person ] ; has_one :organization ; end
-class Organization ; include Filebase::Model[ :test / :db / :organization ] ; has_many :members, :class => Person ; end
+class Person ; include Filebase::Model[ 'test/db/person' ] ; has_one :organization ; end
+class Organization ; include Filebase::Model[ 'test/db/organization' ] ; has_many :members, :class => Person ; end
 
 describe 'A filebase' do
 
