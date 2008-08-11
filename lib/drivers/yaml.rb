@@ -13,7 +13,7 @@ class Filebase
   	end
   	
   	def all
-  	  Dir[ path('*') ].map { |file| YAML.load( File.read( file ) ) }
+  	  Dir[ path('*') ].map { |file| ::YAML.load( File.read( file ) ) }
   	end
     
     def find( key )
