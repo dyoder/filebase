@@ -39,7 +39,7 @@ class Filebase
 		      module_eval do
 		        define_method name do
   		        @has_one ||= {}
-    		      options[:class] ||= Object.module_eval( name.to_s.camel_case )
+    		      options[:class] ||= Object.module_eval( name.to_s.gsub(/(_)(\w)/) { $2.upcase }.gsub(/^([a-z])/) { $1.upcase } )
 		          @has_one[name] ||= options[:class].find( get( name ) ) 
 		        end
 		        define_method( name.to_s + '=' ) do | val |

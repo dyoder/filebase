@@ -3,13 +3,20 @@ require 'bacon'
 Bacon.extend Bacon::TestUnitOutput
 Bacon.summary_on_exit
 
+
+$:.unshift '../lib'
 require 'lib/filebase'
 require 'lib/filebase/model'
+require 'lib/drivers/yaml'
 
 class Person ; include Filebase::Model[ 'test/db/person' ] ; has_one :organization ; end
 class Organization ; include Filebase::Model[ 'test/db/organization' ] ; has_many :members, :class => Person ; end
 
 describe 'A filebase' do
+
+  it 'should allow you to load all records from a given database' do
+    Person.all.size.should == 1
+  end
 
   it 'should allow you to access an existing record' do
     Person.find( 'joe@acme.com' ).name.should == 'Joe Smith'

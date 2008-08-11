@@ -9,7 +9,7 @@ class Filebase
     end
     
   	def path( key )
-  		@root / key + '.yml'
+  	  File.join( @root, key ) + '.yml'
   	end
   	
   	def all
