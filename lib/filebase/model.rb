@@ -25,7 +25,7 @@ class Filebase
 		    attr_accessor :db
 		    def create( assigns ) ; save( new( assigns ) ) ; end
 		    def all ; db.all.map { |attrs| new( attrs ) } ; end
-		    def find( key ) ; attrs = db.find( key ); new( attrs.merge( :key => key ) ) if attrs ; end
+		    def find( key ) ; attrs = db.find( key ); new( attrs ) if attrs ; end
 		    def []( key ) ; find( key ) ; end
 		    def save( object )
 		      raise( Filebase::Error.new, 'attempted to save an object with nil key' ) if object.key.nil? or object.key.empty?
@@ -73,6 +73,8 @@ class Filebase
         def save ; self.class.save( self ) ; self; end
         def delete ; self.class.delete( self ) ; self ; end
         def ==(object) ; key == object.key ; end
+        def eql?(object) ; key == object.key ; end
+        def hash ; key.hash ; end
       end
 
 		end
