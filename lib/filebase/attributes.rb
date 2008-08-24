@@ -1,6 +1,6 @@
 module Attributes
   
-	def initialize(hash = {} )
+	def initialize( hash = {} )
 	  attributes = hash
 	end
 	
@@ -35,13 +35,10 @@ module Attributes
 	end
 	
 	def get(name)
-		rval = attributes[name.to_s]
-		rval.is_a?( Hash ) ? Attributes.new( rval ) : rval
+		( rval = attributes[name.to_s].is_a?( Hash ) and self.new( rval ) ) or rval
 	end
 	
-	def to_h
-		@attrs
-	end
+	def to_h ; @attrs ; end
 	
   alias_method :to_hash, :to_h
   
