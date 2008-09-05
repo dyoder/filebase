@@ -24,7 +24,7 @@ module Attributes
 	def set(name, val) ; attributes[name.to_s] = val ; end
 	
 	def get(name)
-		( ( rval = attributes[name.to_s] ).is_a?( Hash ) and self.class.new( rval ) ) or rval
+		( ( rval = attributes[name.to_s] ).is_a?( Hash ) and attributes[name.to_s] = self.class.new( rval ) ) or rval
 	end
 	
 	def to_h ; @attrs ; end

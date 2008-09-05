@@ -28,7 +28,7 @@ SPEC = Gem::Specification.new do |s|
 end
 
 task :package => :clean do 
-  Gem::Builder.new(SPEC).build
+  Gem::Builder.new( SPEC ).build
 end
 
 task :clean do
