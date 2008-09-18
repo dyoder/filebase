@@ -9,11 +9,21 @@ module Attributes
 	
 	def attributes ; @attrs ||= {} ; end
 	
+	def has_key?( key ) ; attributes.has_key?( key.to_s ) ; end
+	
+	def delete( key ) ; attributes.delete( key.to_s ) ; end
+	
 	def method_missing(name,*args)
+	  name = name.to_s
 	  case args.length
-    when 0 then get( name.to_s )
-    when 1 then	set( name.to_s[0..-2], args[0] )
-    else raise ArgumentError.new("#{args.length} for 0 or 1")
+    when 0 then get( name )
+    when 1
+      if name[-1,1] == '=' 
+        set( name[0..-2], args[0] )
+      else
+        super
+      end
+    else super
 		end
 	end
 	
