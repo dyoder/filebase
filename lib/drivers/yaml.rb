@@ -23,7 +23,7 @@ class Filebase
   	end
   	
   	def save( key, object )
-  		File.write( path( key ), object.to_yaml )
+  		File.write( path( key ), object.to_yaml ) and object
   	end
   	
   	def delete( key )

@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{filebase}
-  s.version = "0.3.4"
+  s.version = "0.3.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Yoder"]
@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://dev.zeraweb.com/waves}
   s.require_paths = ["lib"]
   s.required_ruby_version = Gem::Requirement.new(">= 1.8.6")
+  s.rubyforge_project = %q{filebase}
   s.rubygems_version = %q{1.2.0}
   s.summary = %q{Simple file-based database with model support.}
 

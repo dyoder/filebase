@@ -9,8 +9,10 @@ include FileUtils
 Gem::manage_gems
 
 SPEC = Gem::Specification.new do |s|
-  s.name = %q{filebase}
-  s.version = "0.3.4"
+  s.name = 'filebase'
+  s.version = "0.3.5"
+  s.rubyforge_project = 'filebase'
+  s.summary = "Open-source framework for building Ruby-based Web applications."
   s.specification_version = 2 if s.respond_to? :specification_version=
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Yoder"]
@@ -27,12 +29,12 @@ SPEC = Gem::Specification.new do |s|
   s.add_dependency(%q<extensions>, [">= 0"])
 end
 
-task :package => :clean do 
+task :package => :gemspec do 
   Gem::Builder.new( SPEC ).build
 end
 
 task :clean do
-  system 'rm -rf *.gem'
+  system 'rm -f *.gem *.gemspec'
 end
 
 task :install => :package do
@@ -40,7 +42,7 @@ task :install => :package do
 end
 
 desc "create .gemspec file (useful for github)"
-task :gemspec do
+task :gemspec => :clean do
   filename = "#{SPEC.name}.gemspec"
   File.open(filename, "w") do |f|
     f.puts SPEC.to_ruby
