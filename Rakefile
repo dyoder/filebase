@@ -10,7 +10,7 @@ Gem::manage_gems
 
 SPEC = Gem::Specification.new do |s|
   s.name = 'filebase'
-  s.version = "0.3.5"
+  s.version = "0.3.6"
   s.rubyforge_project = 'filebase'
   s.summary = "Open-source framework for building Ruby-based Web applications."
   s.specification_version = 2 if s.respond_to? :specification_version=
@@ -29,7 +29,7 @@ SPEC = Gem::Specification.new do |s|
   s.add_dependency(%q<extensions>, [">= 0"])
 end
 
-task :package => :gemspec do 
+task :package => [ :gemspec ] do 
   Gem::Builder.new( SPEC ).build
 end
 
@@ -57,5 +57,5 @@ end
 
 desc "run test suite to verify implementation"
 task :test do
-  `bacon test/*.rb`
+  system( 'bacon test/*.rb' )
 end
