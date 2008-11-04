@@ -29,7 +29,7 @@ class Filebase
 		    def []( key ) ; find( key ) ; end
 		    def save( object )
 		      raise( Filebase::Error.new, 'attempted to save an object with nil key' ) if object.key.nil? or object.key.empty?
-          db.save( object.key, object.to_h )
+          db.save( object.key, object.to_h ) and object
 		    end
 		    def delete( object )
 		      raise( Filebase::Error.new, 'attempted to delete an object with nil key' ) if object.key.nil? or object.key.empty?
